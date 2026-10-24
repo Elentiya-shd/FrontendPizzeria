@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panel de recepción de pedidos de la pizzería">
+    <title>Recepción | Pizzería</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/recepcion.css">
+
+    <script src="/js/recepcion.js" defer></script>
+</head>
+<body>
+    <header class="topbar">
+        <div>
+            <p class="eyebrow">SISTEMA DE PEDIDOS</p>
+            <h1>Recepción</h1>
+        </div>
+
+        <span class="role-label">Panel de recepción</span>
+    </header>
+
+    <main class="container">
+        <section class="welcome">
+            <div>
+                <h2>Gestión de pedidos</h2>
+                <p>Consulta los pedidos y confirma las entregas.</p>
+            </div>
+
+            <button class="btn btn-primary" id="btnNuevoPedido">
+                + Nuevo pedido
+            </button>
+        </section>
+
+        <section class="summary" aria-label="Resumen de pedidos">
+            <article class="summary-card">
+                <span>Total de pedidos</span>
+                <strong id="totalPedidos">0</strong>
+            </article>
+
+            <article class="summary-card">
+                <span>En preparación</span>
+                <strong id="pedidosPreparacion">0</strong>
+            </article>
+
+            <article class="summary-card">
+                <span>Listos</span>
+                <strong id="pedidosListos">0</strong>
+            </article>
+
+            <article class="summary-card">
+                <span>Entregados</span>
+                <strong id="pedidosEntregados">0</strong>
+            </article>
+        </section>
+
+        <section class="orders-panel">
+            <div class="panel-heading">
+                <div>
+                    <h2>Pedidos registrados</h2>
+                    <p>Busca un pedido o filtra por su estado.</p>
+                </div>
+            </div>
+
+            <div class="filters">
+                <label class="search-field">
+                    Buscar pedido
+                    <input
+                        type="search"
+                        id="buscarPedido"
+                        placeholder="Folio, cliente o producto"
+                    >
+                </label>
+
+                <label>
+                    Estado
+                    <select id="filtroEstado">
+                        <option value="TODOS">Todos los estados</option>
+                        <option value="EN_PREPARACION">En preparación</option>
+                        <option value="LISTO">Listos</option>
+                        <option value="ENTREGADO">Entregados</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Folio</th>
+                            <th>Cliente</th>
+                            <th>Pedido</th>
+                            <th>Hora</th>
+                            <th>Tiempo restante</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tablaPedidos"></tbody>
+                </table>
+            </div>
+
+            <p id="mensajeVacio" class="empty-message" hidden>
+                No se encontraron pedidos.
+            </p>
+
+            <p class="demo-note">
+                Datos de demostración. La conexión con el backend está pendiente.
+            </p>
+        </section>
+    </main>
+
+    <dialog id="dialogNuevoPedido">
+        <form id="formNuevoPedido" class="order-form">
+            <div class="dialog-heading">
+                <div>
+                    <p class="eyebrow">RECEPCIÓN</p>
+                    <h2>Registrar pedido</h2>
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    id="btnCerrarDialogo"
+                    aria-label="Cerrar formulario"
+                >×</button>
+            </div>
+
+            <label>
+                Nombre del cliente
+                <input
+                    type="text"
+                    id="nombreCliente"
+                    maxlength="80"
+                    required
+                    placeholder="Ej. Andrea López"
+                >
+            </label>
+
+            <label>
+                Detalle del pedido
+                <textarea
+                    id="detallePedido"
+                    maxlength="300"
+                    required
+                    rows="3"
+                    placeholder="Ej. Pizza de pepperoni grande"
+                ></textarea>
+            </label>
+
+            <div class="form-actions">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="btnCancelar"
+                >
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn btn-primary">
+                    Registrar pedido
+                </button>
+            </div>
+        </form>
+    </dialog>
+</body>
+</html>
